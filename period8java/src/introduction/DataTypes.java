@@ -6,6 +6,8 @@ public class DataTypes {
 		String ten = "10";
 		String two = "2";
 		
+		
+		
 		if(ten.compareTo(two) > 0)
 			System.out.println(ten + " is greater than " + two);
 		else

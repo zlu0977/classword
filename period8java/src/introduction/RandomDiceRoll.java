@@ -13,6 +13,8 @@ public class RandomDiceRoll {
 		for(int i = 0; i < 6; i ++)
 			System.out.println((i + 1) + " appreared " + results[i] + " times");*/
 		
+		
+		
 		System.out.println(randomCard());
 	}
 	
