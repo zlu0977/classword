@@ -13,9 +13,8 @@ public class RandomDiceRoll {
 		for(int i = 0; i < 6; i ++)
 			System.out.println((i + 1) + " appreared " + results[i] + " times");*/
 		
-		
-		
-		System.out.println(randomCard());
+		for(int idx = 0; idx < 10; idx ++)	
+			System.out.println(randomCard());
 	}
 	
 	public static int rollFairDie()
@@ -36,6 +35,12 @@ public class RandomDiceRoll {
 		
 		return unfairDie[(int)(unfairDie.length * Math.random())];
 	}
+	
+	
+	
+	
+	
+	
 	
 	public static String randomCard()
 	{
