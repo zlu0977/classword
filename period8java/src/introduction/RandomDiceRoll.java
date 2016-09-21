@@ -3,18 +3,20 @@ package introduction;
 public class RandomDiceRoll {
 
 	public static void main(String[] args) {
-		/*int[] results = new int[6];
-		for(int idx = 0; idx < 10000; idx ++)
+		int[] results = new int[6];
+		int totalRolls = 10000;
+		
+		for(int idx = 0; idx < totalRolls; idx ++)
 		{	
-			int result = rollUnfairDie();
+			int result = rollFairDie();
 			System.out.println("Roll #" +  (idx + 1) + " : " + result);
 			results[result -1] ++;
 		}
 		for(int i = 0; i < 6; i ++)
-			System.out.println((i + 1) + " appreared " + results[i] + " times");*/
-		
-		for(int idx = 0; idx < 10; idx ++)	
-			System.out.println(randomCard());
+		{
+			double percentage = ((int)(results[i]/(double)totalRolls * 10000))/100.0;
+			System.out.println((i + 1) + " appreared " + percentage + "%");
+		}
 	}
 	
 	public static int rollFairDie()
@@ -34,19 +36,5 @@ public class RandomDiceRoll {
 		return unfairDie[roll];*/
 		
 		return unfairDie[(int)(unfairDie.length * Math.random())];
-	}
-	
-	
-	
-	
-	
-	
-	
-	public static String randomCard()
-	{
-		String[] suits = {"Diamonds", "Hearts", "Spades", "Clubs"};
-		String[] value = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
-		
-		return "The " + value[(int)(value.length * Math.random())] + " of " + suits[(int)(suits.length * Math.random())];
 	}
 }
