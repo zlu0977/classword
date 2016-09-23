@@ -80,43 +80,32 @@ public class StringPractice {
 	
 	public static void syso(String string)
 	{
-		String printString = string;
-		int cutoff = 45;
-		if(printString.length() > cutoff)
+		String printString = "";
+		int cutoff = 35;
+		
+		while(string.length() > 0)
 		{
-			for(int idx = 0; idx * cutoff < string.length(); idx ++)
+			String nextWord = "";
+			String cut = "";
+			
+			while(cut.length() + nextWord.length() < cutoff && string.length() > 0)
 			{
-				printString += getCut(string, cutoff, idx + 1) + "\n";
+				cut += nextWord;
+				
+				string = string.substring(nextWord.length());
+				
+				
+				int endOfWord = string.indexOf(" ");
+				if(endOfWord < 0)
+					endOfWord = string.length() - 1;
+				
+				nextWord = string.substring(0, endOfWord + 1);
 			}
+			
+			printString += cut + "\n";
 		}
 		
 		System.out.println(printString);
-	}
-	
-	private static String getCut(String string, int cutoff, int cut)
-	{
-		int cutIndex = cut * cutoff;
-		if(cutIndex > string.length())
-			cutIndex = string.length();
-		
-		String currentCut = string.substring((cutIndex - cutoff), cutIndex);
-		
-		int indexOfLastSpace = currentCut.length() - 1;
-		
-		for(int idx = currentCut.length() - 1; idx >= 0; idx --)
-		{
-			String letter = currentCut.substring(idx, idx + 1);
-			if(letter.equals(" "))
-			{
-				indexOfLastSpace = idx;
-				break;
-			}
-		}
-		int lastttt = 0;
-		if((indexOfLastSpace - cutoff) > 0)
-			lastttt = (indexOfLastSpace - cutoff);
-		
-		return string.substring(lastttt, indexOfLastSpace);
 	}
 
 }
