@@ -11,6 +11,10 @@ public class ZhengSchool implements Chatbot {
 		{
 			schoolResponse = ZhengMain.promptInput();
 			ZhengMain.syso("lolz");
+			
+			if(schoolResponse.indexOf("quit") >= 0)
+				inSchoolLoop = false;
+				ZhengMain.promptForever();
 		}
 	}
 
