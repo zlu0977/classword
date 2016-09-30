@@ -18,4 +18,14 @@ public class ZhengSchool implements Chatbot {
 		}
 	}
 
+	public boolean isTriggered(String userInput) {
+		String[] triggers = {"school", "teacher", "class"};
+		
+		for(int i = 0; i < triggers.length; i ++)
+			if(ZhengMain.findKeyword(userInput, triggers[i], 0) >= 0)
+				return true;
+		
+		return false;
+	}
+
 }
