@@ -9,33 +9,86 @@ public class ArrayPractice {
 	public static void main(String[] args) {                                                       
 		int[] fiftyNumbers = new int[50];
 		populate(fiftyNumbers);
-		print(fiftyNumbers);
-		randomize(fiftyNumbers);
-		print(fiftyNumbers);
+		//print(fiftyNumbers);
+		randomize(fiftyNumbers, 50);
+		//print(fiftyNumbers);
 		rollDice(fiftyNumbers);
+		//print(fiftyNumbers);
 		countResult(fiftyNumbers);
 	}
 	
 	private static void countResult(int[] fiftyNumbers) {
-		// TODO Auto-generated method stub
+		int[] percentages = new int[11];
+		
+		for(int i = 0; i < fiftyNumbers.length; i++)
+		{
+			if(fiftyNumbers[i] == 2)
+				percentages[0] ++;
+			if(fiftyNumbers[i] == 3)
+				percentages[1] ++;
+			if(fiftyNumbers[i] == 4)
+				percentages[2] ++;
+			if(fiftyNumbers[i] == 5)
+				percentages[3] ++;
+			if(fiftyNumbers[i] == 6)
+				percentages[4] ++;
+			if(fiftyNumbers[i] == 7)
+				percentages[5] ++;
+			if(fiftyNumbers[i] == 8)
+				percentages[6] ++;
+			if(fiftyNumbers[i] == 9)
+				percentages[7] ++;
+			if(fiftyNumbers[i] == 10)
+				percentages[8] ++;
+			if(fiftyNumbers[i] == 11)
+				percentages[9] ++;
+			if(fiftyNumbers[i] == 12)
+				percentages[10] ++;
+		}
+		
+		for(int i = 0; i < percentages.length; i++)
+		{
+			double percentage = ((int)(percentages[i] / (double)fiftyNumbers.length * 10000))/100.0;
+			System.out.println((i + 2) + " appreared " + percentage + "%");
+		}
 		
 	}
 
 	private static void rollDice(int[] fiftyNumbers) {
-		// TODO Auto-generated method stub
 		
+		for(int i = 0; i < fiftyNumbers.length; i++)
+		{
+			int roll1 = ((int)(Math.random() * 6) + 1);
+			int roll2 = ((int)(Math.random() * 6) + 1);
+			
+			fiftyNumbers[i] = roll1 + roll2;
+		}
 	}
 
-	private static void randomize(int[] fiftyNumbers) {
-		// TODO Auto-generated method stub
-		
+	private static void randomize(int[] fiftyNumbers, int max) {
+		for(int i = 0; i < fiftyNumbers.length; i++)
+		{
+			int randNum = ((int)(Math.random() * max) + 1);
+			fiftyNumbers[i] = randNum;
+		}
 	}
 
 	private static void populate(int[] fiftyNumbers) {
-		// TODO Auto-generated method stub
+		for(int i = 0; i < fiftyNumbers.length; i++)
+			fiftyNumbers[i] = i + 1;
 		
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public static void lesson2()
 	{
 		long start = System.currentTimeMillis();
