@@ -7,61 +7,43 @@ public class ArrayPractice {
 	static String[] someStrings;
 	
 	public static void main(String[] args) {                                                       
-		int[] fiftyNumbers = new int[50];
+		int[] fiftyNumbers = new int[100];
+		int numberOfDice = 3;
+		
 		populate(fiftyNumbers);
 		//print(fiftyNumbers);
-		randomize(fiftyNumbers, 50);
+		randomize(fiftyNumbers, 500);
 		//print(fiftyNumbers);
-		rollDice(fiftyNumbers);
+		rollDice(fiftyNumbers, numberOfDice);
 		//print(fiftyNumbers);
-		countResult(fiftyNumbers);
+		countResult(fiftyNumbers, numberOfDice);
 	}
 	
-	private static void countResult(int[] fiftyNumbers) {
-		int[] percentages = new int[11];
+	private static void countResult(int[] fiftyNumbers, int numberOfDice) {
+		int min = 1 * numberOfDice;
+		int max = 6 * numberOfDice;
 		
-		for(int i = 0; i < fiftyNumbers.length; i++)
-		{
-			if(fiftyNumbers[i] == 2)
-				percentages[0] ++;
-			if(fiftyNumbers[i] == 3)
-				percentages[1] ++;
-			if(fiftyNumbers[i] == 4)
-				percentages[2] ++;
-			if(fiftyNumbers[i] == 5)
-				percentages[3] ++;
-			if(fiftyNumbers[i] == 6)
-				percentages[4] ++;
-			if(fiftyNumbers[i] == 7)
-				percentages[5] ++;
-			if(fiftyNumbers[i] == 8)
-				percentages[6] ++;
-			if(fiftyNumbers[i] == 9)
-				percentages[7] ++;
-			if(fiftyNumbers[i] == 10)
-				percentages[8] ++;
-			if(fiftyNumbers[i] == 11)
-				percentages[9] ++;
-			if(fiftyNumbers[i] == 12)
-				percentages[10] ++;
-		}
+		int[] percentages = new int[max - min + 1];
+		
+		for(int i : fiftyNumbers)
+			percentages[i - min] ++;
 		
 		for(int i = 0; i < percentages.length; i++)
 		{
 			double percentage = ((int)(percentages[i] / (double)fiftyNumbers.length * 10000))/100.0;
-			System.out.println((i + 2) + " appreared " + percentage + "%");
+			System.out.println((i + min) + " appreared " + percentage + "%");
 		}
 		
 	}
 
-	private static void rollDice(int[] fiftyNumbers) {
-		
+	private static void rollDice(int[] fiftyNumbers, int numberOfDice) {
 		for(int i = 0; i < fiftyNumbers.length; i++)
 		{
-			int roll1 = ((int)(Math.random() * 6) + 1);
-			int roll2 = ((int)(Math.random() * 6) + 1);
-			
-			fiftyNumbers[i] = roll1 + roll2;
+			int sum = 0;
+			for(int a = 0; a < numberOfDice; a++)
+				sum += ((int)(Math.random() * 6) + 1);
+
+			fiftyNumbers[i] = sum;
 		}
 	}
 
@@ -75,8 +57,7 @@ public class ArrayPractice {
 
 	private static void populate(int[] fiftyNumbers) {
 		for(int i = 0; i < fiftyNumbers.length; i++)
-			fiftyNumbers[i] = i + 1;
-		
+			fiftyNumbers[i] = i + 1;	
 	}
 
 	
