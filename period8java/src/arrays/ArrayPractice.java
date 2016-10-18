@@ -8,7 +8,7 @@ public class ArrayPractice {
 	
 	public static void main(String[] args) {                                                       
 		int[] fiftyNumbers = new int[100];
-		int numberOfDice = 3;
+		int numberOfDice = 4;
 		
 		populate(fiftyNumbers);
 		//print(fiftyNumbers);
