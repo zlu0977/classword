@@ -13,6 +13,19 @@ public class ArrayMethods {
       * DO NOT spend hours and hours trying to fix perfect code just because my test
       * says that it isn't perfect!
       * */
+    	
+    	int[] stuff = {4, 1, 6, 7, 16, 765, 656, 5, 25, 2};
+    	int[] stuff2 = {10, 9, 8, 7, 6, 5};
+    	//reverseOrder(stuff);
+    	//ArrayPractice.print(stuff);
+    	
+    	//System.out.print(searchUnsorted(stuff, 11));
+    	//System.out.print(searchSorted(stuff2, 10));
+    	
+    	/*if(isSorted(stuff2))
+    		System.out.print("sorteed");
+    	else
+    		System.out.print("not");*/
     }
     
     public static int searchUnsorted(int[] arrayToSearch, int key){
@@ -36,16 +49,25 @@ public class ArrayMethods {
      * 
      * Note: You should attempt to write a method that is more efficient that searchUnsorted
      * */
-    	boolean isFound = false;
-    	int targetIndex = sortedArrayToSearch.length/2;
-    	
-    	while(!isFound)
+    	boolean isFinished = false;
+    	int minIndex = 0;
+    	int maxIndex = sortedArrayToSearch.length - 1;
+
+    	while(!isFinished)
     	{
+    		int targetIndex = maxIndex - ((int)((maxIndex-minIndex)/2));
+    		if(minIndex == 0 && maxIndex == 1)
+    			targetIndex = 0;
+    		
     		if(sortedArrayToSearch[targetIndex] == key)
-    		{
-    			isFound = true;
     			return targetIndex;
-    		}
+    		else if(sortedArrayToSearch[targetIndex] > key)
+    			minIndex = targetIndex;
+    		else if(sortedArrayToSearch[targetIndex] < key)
+    			maxIndex = targetIndex;
+    		
+    		if(minIndex >= maxIndex)
+    			isFinished = true;
     	}
     	
     	return -1;
@@ -55,7 +77,12 @@ public class ArrayMethods {
         /**
          * This method takes an in array as a parameter and returns 'true' if the array is already sorted in DESCENDING order
          * */
-        return false;
+    	for(int i = 0; i < array.length; i++)
+    		if(i != array.length - 1)
+    			if(array[i] < array[i + 1])
+	    			return false;
+    	
+        return true;
     }
     
     
@@ -70,8 +97,44 @@ public class ArrayMethods {
          * index 4 = the number of values greater than or equal to the mean
          * index 5 = the number of values below the mean
          * */
-         double[] stats = new double[6];
-         return stats;
+	     double[] stats = new double[6];
+	     
+	     double mean = 0;
+	     double max = 0;
+	     double min = 0;
+	     double median = 0;
+	     double meanPlus = 0;
+	     double meanMinus = 0;
+	     
+	     for(int i = 0; i < array.length; i++)
+	     {
+	     	mean += array[i];
+	     	
+	     	if(max < array[i])
+				max = array[i];
+			
+			if(min > array[i])
+				min = array[i];
+	     }
+	     stats[0] = mean/array.length;
+	     stats[1] = max;
+	     stats[2] = min;
+	     stats[3] = median;
+	     
+	     //MEDIAN
+	     
+	     for(double num : array)
+	     {
+	    	 if(num < mean)
+	    		 meanMinus ++;
+	    	 else
+	    		 meanPlus ++;
+	     }
+	     
+	     stats[4] = meanPlus;
+	     stats[5] = meanMinus;
+	    
+	     return stats;
     }
     
     public static void reverseOrder(int[] array){
@@ -87,6 +150,14 @@ public class ArrayMethods {
          * array = {-6, 16, 10, 9, 1, 5}
          * 
          * */
+    	
+    	int temp;
+    	for(int i = 0; i < array.length/2; i++)
+    	{
+    		temp = array[i];
+    		array[i] = array[array.length-1-i];
+    		array[array.length-1-i] = temp;
+    	}
     }
     
     public static int countDifferences(int[] array1, int[] array2){
