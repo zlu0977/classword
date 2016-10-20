@@ -3,8 +3,8 @@ package introduction;
 import java.util.Scanner;
 
 public class Quiz1 {
-	//1 points for: visibility, data type declaration, correct method, comparing strings, asking username once
-	//.5 points Max 3 tries, .5 printing invalid password
+	//1 points for: visibility, data type declaration, correct method, comparing strings, asking username once, use waitForEntry correctly
+	//.5 points for: Max 3 tries, printing invalid password, triesremaining changes, print correct triesleft
 	static Scanner input = new Scanner(System.in);
 	
 	private static String username = "test_user";
