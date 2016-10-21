@@ -26,6 +26,11 @@ public class ArrayMethods {
     		System.out.print("sorteed");
     	else
     		System.out.print("not");*/
+    	
+    	//ArrayPractice.print(generateDistinctItemsList(10));
+    	
+    	cycleThrough(stuff2, 2);
+    	ArrayPractice.print(stuff2);
     }
     
     public static int searchUnsorted(int[] arrayToSearch, int key){
@@ -212,7 +217,25 @@ public class ArrayMethods {
          * contains only entries between 1 and 2n (inclusive) and has no duplicates
          * 
          * */
-        return null; 
+    	boolean isDuplicate = false;
+    	int randNum = 0;
+    	int[] newArray = new int[n];
+    	for(int i = 0; i < n; i ++)
+    	{
+    		do
+    		{
+	    		randNum = (int)(Math.random() * 2 * n) + 1;
+	    		
+	    		isDuplicate = false;
+	    		for(int j = 0; j < n; j ++)
+	    			if(newArray[j] == randNum)
+	    				isDuplicate = true;
+	    		
+    		}while(isDuplicate);
+    		
+    		newArray[i] = randNum;
+    	}
+        return newArray; 
     }
     
     
@@ -239,6 +262,18 @@ public class ArrayMethods {
          * CHALLENGE
          * For extra credit, make your method handle NEGATIVE n
          * */
+    	
+    	while(n > 0)
+    	{
+    		int first = array[0];
+    		
+    		for(int i = 0; i < array.length; i++)
+    			if(i < array.length - 1)
+    				array[i] = array[i + 1];
+    		
+    		array[array.length - 1] = first;
+    		n --;
+    	}
     }
     
 
