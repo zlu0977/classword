@@ -15,7 +15,8 @@ public class ArrayMethods {
       * */
     	
     	int[] stuff = {4, 1, 6, 7, 16, 765, 656, 5, 25, 2};
-    	int[] stuff2 = {10, 9, 8, 7, 6, 5};
+    	int[] stuff2 = {1,3,5,3,4};
+    	int[] stuff3 = {3,5,0,3,5,3};
     	//reverseOrder(stuff);
     	//ArrayPractice.print(stuff);
     	
@@ -27,10 +28,8 @@ public class ArrayMethods {
     	else
     		System.out.print("not");*/
     	
-    	//ArrayPractice.print(generateDistinctItemsList(10));
-    	
-    	cycleThrough(stuff2, 2);
-    	ArrayPractice.print(stuff2);
+    	System.out.println(longestSharedSequence(stuff2, stuff3));	
+    		
     }
     
     public static int searchUnsorted(int[] arrayToSearch, int key){
@@ -106,7 +105,7 @@ public class ArrayMethods {
 	     
 	     double mean = 0;
 	     double max = 0;
-	     double min = 0;
+	     double min = array[0];
 	     double median = 0;
 	     double meanPlus = 0;
 	     double meanMinus = 0;
@@ -121,12 +120,11 @@ public class ArrayMethods {
 			if(min > array[i])
 				min = array[i];
 	     }
-	     stats[0] = mean/array.length;
+	     
+	     mean = mean/array.length;
+	     stats[0] = mean;
 	     stats[1] = max;
 	     stats[2] = min;
-	     stats[3] = median;
-	     
-	     //MEDIAN
 	     
 	     for(double num : array)
 	     {
@@ -139,6 +137,23 @@ public class ArrayMethods {
 	     stats[4] = meanPlus;
 	     stats[5] = meanMinus;
 	    
+	     while(array.length > 2)
+	     {
+	    	 array = excludeFromArray(array, min);
+	    	 array = excludeFromArray(array, max);
+	    	 
+	    	 double[] minMax = getMinMax(array);
+	    	 min = minMax[0];
+	    	 max = minMax[1];
+	     }
+	     
+	     if(array.length == 2)
+	    	 median = (array[0] + array[1])/2;
+	     else
+	    	 median = array[0];
+	     
+	     stats[3] = median;
+	     
 	     return stats;
     }
     
@@ -176,7 +191,14 @@ public class ArrayMethods {
          * countDifferences({1,2,3},{1,3,2}) returns 2, since '2' and '3' are both present, but different locations
          * 
          * */
-         return 0;
+        int differences = 0;
+    	for(int i = 0; i < array1.length; i++)
+    	{
+    		if(array1[i] != array2[i])
+    			differences ++;
+    	}
+    	
+        return differences;
     }
     
 
@@ -190,11 +212,28 @@ public class ArrayMethods {
          * longestSequence({0,9,10,11,4,3,8,9}) returns '3', since '9,10,11' is 3 integers long
          * longestSequence({0,9,8,11,4,3,7,9}) returns '1', since there are no consecutive integers
          * */
+    	
+    	int longestSeq = 1;
+    	int currentSeq = 1;
+    	
+    	for(int i = 0; i < array1.length; i++)
+    	{
+    		if(i != array1.length - 1 && array1[i] + 1 == array1[i + 1])
+    			currentSeq ++;
+    		else
+    		{
+    			if(currentSeq > longestSeq)
+    				longestSeq = currentSeq;
+    			
+    			currentSeq = 1;
+    		}
+    			
+    	}
         
-        return 0;
+        return longestSeq;
     }
 
-    public static int longestSharedSequence(int[] array1, int[] array2){
+     public static int longestSharedSequence(int[] array1, int[] array2){
         /**This method counts the longest unbroken, shared sequence in TWO arrays.
          * The sequence does NOT have to be a consecutive sequence
          * It does NOT matter where the sequence begins, the arrays might not be the same length
@@ -205,11 +244,102 @@ public class ArrayMethods {
          *          since the sequence '9,6,3,4,3' is in both arrays and is 5 integers long, it doesn't matter that the sequence begins at different indices 
          * longestSequence({9,6,1,4,3,6,7,9}, {9,6,5,8,3,6,7,0}) returns '3', since the sequence '3,6,7' is in both arrays and is 3 integers long
          * */
-        
-        return 0;
+    	/*int longestSeq = 1;
+    	for(int i = 0; i < array1.length; i++)
+    	{
+    		int numIndex = 0;
+    		int target = array1[i];
+    		int currentSeq = 1;
+    		boolean isFinished1 = false;
+        			
+    		while(!isFinished1)
+    		{
+    			boolean isFinished2 = false;
+    			numIndex = indexOf(array2, target, numIndex);
+    			if(numIndex < 0)
+    				isFinished1 = true;
+    			else
+    			{
+    				while(!isFinished2)
+    				{
+    					if(i != array1.length - 1 && numIndex != array2.length - 1 && array1[i + 1] == array2[numIndex + 1])
+    					{
+    						currentSeq ++;
+    						i++;
+    					}
+    					else
+    					{
+    						if(currentSeq > longestSeq)
+    	        				longestSeq = currentSeq;
+    	        			
+    	        			isFinished2 = true;
+    					}
+    					
+	    				numIndex ++;
+    				}
+    				
+    				if(numIndex >= array2.length)
+    					isFinished1 = true;
+    			}
+    		}
+    	}
+    	
+    	return longestSeq;*/
+    	 
+    	 int max = 0;
+    	 for(int seqStart = 0; seqStart < array1.length; seqStart++)
+    	 {
+    		 int seqEnd = seqStart;
+    		 boolean inLoop = true;
+    		 while(inLoop)
+    		 {
+	    		 int[] seq = getSequence(seqStart, seqEnd, array1);
+	    		// ArrayPractice.print(seq);
+	    		 if(checkSequence(seq, array2))
+	    		 {
+	    			 if(seq.length > max)
+	    				 max = seq.length;
+	    			 
+	    			 if(seqEnd < array1.length)
+	    				 seqEnd ++;
+	    			 else
+	    				 inLoop = false;
+	    		 }
+	    		 else
+	    			 inLoop = false;
+    		 }
+    	 }
+    	 
+    	 return max;
     }
 
-    public static int[] generateDistinctItemsList(int n){
+    private static boolean checkSequence(int[] seq, int[] array2) {
+		A:for(int i = 0; i < array2.length; i++)
+			B:for(int j = 0; j < seq.length; j++)
+				if((j+i) < array2.length && array2[j + i] != seq[j])
+					break B;
+				else if(j == seq.length-1)
+					return true;
+		
+		return false;
+	}
+    //0,3,5,3,4
+    //0,2
+	private static int[] getSequence(int seqStart, int seqEnd, int[] array1) {
+		
+		int[] seq = new int[seqEnd - seqStart + 1];
+		int j = 0;
+		for(int i = seqStart; i <= seqEnd; i++)
+		{
+			seq[j] = array1[i];
+			//j++;
+			
+			System.out.println(i);
+		}
+		return seq;
+	}
+
+	public static int[] generateDistinctItemsList(int n){
         /**
          * This method needs to generate an int[] of length n that contains distinct, random integers
          * between 1 and 2n 
@@ -217,7 +347,7 @@ public class ArrayMethods {
          * contains only entries between 1 and 2n (inclusive) and has no duplicates
          * 
          * */
-    	boolean isDuplicate = false;
+        boolean isDuplicate = false;
     	int randNum = 0;
     	int[] newArray = new int[n];
     	for(int i = 0; i < n; i ++)
@@ -262,8 +392,7 @@ public class ArrayMethods {
          * CHALLENGE
          * For extra credit, make your method handle NEGATIVE n
          * */
-    	
-    	while(n > 0)
+         while(n > 0)
     	{
     		int first = array[0];
     		
@@ -276,5 +405,93 @@ public class ArrayMethods {
     	}
     }
     
+    private static int indexOf(int[] array, int key, int start)
+    {
+    	for(int i = start; i < array.length; i++)
+	    	if(array[i] == key)
+	    		return i;
+    	
+    	return -1;
+    }
+    
+    private static int indexOf(double[] array, double key, int start)
+    {
+    	for(int i = start; i < array.length; i++)
+	    	if(array[i] == key)
+	    		return i;
+    	
+    	return -1;
+    }
+    
+    private static double[] getMinMax(double[] array)
+    {
+    	double[] minMax = new double[2];
+    	double min = array[0];
+    	double max = 0;
+    	
+    	for(int i = 0; i < array.length; i++)
+    	{
+    		if(max < array[i])
+				max = array[i];
+			
+			if(min > array[i])
+				min = array[i];
+    	}
+    	
+    	minMax[0] = min;
+    	minMax[1] = max;
+    	
+    	return minMax;
+    }
+    
+    private static double[] excludeFromArray(double[] array, double exclude)
+    {
+    	double[] newArray = new double[array.length - 1];
+    	int newIndex = 0;
+    	boolean isExcluded = false;
+    	for(int i = 0; i < array.length; i++)
+    		
+    		if(array[i] == exclude && !isExcluded)
+    			isExcluded = true;
+    		else
+	    		newArray[newIndex] = array[i];
+    	
+	    	newIndex ++;
 
+    	
+    	return newArray;
+    }
 }
+
+
+/*
+private static double[] excludeFromArray(double[] array, int exclude)
+{
+	double[] newArray = new double[array.length - 1];
+	int newIndex = 0;
+	
+	for(int i = 0; i < array.length; i++)
+    	if(i != exclude)
+    	{
+    		newArray[newIndex] = array[i];
+    		newIndex ++;
+    	}
+	
+	return newArray;
+}
+
+*
+*
+*while(array.length > 2)
+	     {
+	    	 int minIndex = indexOf(array, min, 0); 
+	    	 array = excludeFromArray(array, minIndex);
+	    	 int maxIndex = indexOf(array, max, 0);
+	    	 array = excludeFromArray(array, maxIndex);
+	    	 
+	    	 double[] minMax = getMinMax(array);
+	    	 min = minMax[0];
+	    	 max = minMax[1];
+	     }
+*
+*/

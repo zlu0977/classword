@@ -91,9 +91,11 @@ public class ArrayPractice {
 			System.out.println(s[i]);
 	}
 	
-	private static void print(int[] s) {
+	public static void print(int[] s) {
 		for(int i = 0; i < s.length; i ++)
 			System.out.println(s[i]);
+		
+		System.out.println("_____");
 	}
 
 	private static void makeSpecial(int i) {
