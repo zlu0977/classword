@@ -16,20 +16,51 @@ public class TwoDArray {
 	
 	public static void main(String[] args) {
 		
-		for(int row = 0; row < arr2D.length; row++)
-			for(int col = 0; col < arr2D[row].length; col++)
-				arr2D[row][col] = "(" + row + ", " + col + ")";
-		
-		startExploring();
-		
-		
-		
-//		boolean[][] mines = new boolean[6][6];
-//		plantMines(mines);
-//		String[][] field = createField(mines);
-//		printPic(field);
+//		String[][] map = new String[6][8];
 //		
-//		printGrid(mines);
+//		for(int row = 0; row <map.length; row++)
+//			for(int col = 0; col <map[row].length; col++)
+//				map[row][col] = " ";
+//		
+//		while(true)
+//		{
+//			System.out.println("01234567");
+//			printPic(map);
+//			System.out.println("What column do u want to drop your piece?");
+//			String input = in.nextLine();
+//			int something = Integer.parseInt(input);
+//			if (something >=0 && something <8) {
+//				for (int rows = map.length - 1; rows >= 0;rows--) {
+//					if(!map[rows][something].equals("0")) {
+//						map[rows][something] = "0";
+//						break;
+//					}
+//						
+//						
+//					else if (map[rows][something].equals("0") && rows == 0) {
+//						System.out.println("This column is filled");
+//					}
+//				}
+//			}
+//		}
+		
+		
+		
+		
+//		for(int row = 0; row < arr2D.length; row++)
+//			for(int col = 0; col < arr2D[row].length; col++)
+//				arr2D[row][col] = "(" + row + ", " + col + ")";
+//		
+//		startExploring();
+		
+		
+		
+		boolean[][] mines = new boolean[6][6];
+		plantMines(mines);
+		String[][] field = createField(mines);
+		printPic(field);
+		
+		printGrid(mines);
 		
 		
 
