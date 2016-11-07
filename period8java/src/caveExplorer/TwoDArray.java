@@ -55,12 +55,12 @@ public class TwoDArray {
 		
 		
 		
-		boolean[][] mines = new boolean[6][6];
-		plantMines(mines);
-		String[][] field = createField(mines);
-		printPic(field);
-		
-		printGrid(mines);
+//		boolean[][] mines = new boolean[6][6];
+//		plantMines(mines);
+//		String[][] field = createField(mines);
+//		printPic(field);
+//		
+//		printGrid(mines);
 		
 		
 

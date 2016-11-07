@@ -17,6 +17,8 @@ public class CaveExplorer {
 				caves[row][col] = new CaveRoomZheng("Row: " + row + ", Col: " + col);
 		
 		currentRoom = caves[1][2];
+		caves[1][3] = new EventRoom("MAP ROOM", new GameStartEvent());
+		
 		currentRoom.enter();
 		
 		caves[1][2].setConnection(CaveRoomZheng.WEST, caves[1][1], new Door());
@@ -33,7 +35,7 @@ public class CaveExplorer {
 		{
 			print(currentRoom.getDescription());
 			print("What would you like to do?");
-			String input = in.nextLine();
+			String input = in.nextLine().toLowerCase();
 			
 			currentRoom.interpretAction(input);
 		}
