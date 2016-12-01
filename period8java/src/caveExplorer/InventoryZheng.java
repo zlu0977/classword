@@ -28,11 +28,16 @@ public class InventoryZheng {
 				{
 					String wall = "|   ";
 					String contents = cr.getContents();
-					if(textRow == 1 && cr.getDoor(CaveRoomZheng.WEST) != null)
-						wall = "  "+contents+" ";
+					if(textRow == 1)
+					{
+						if(cr.getDoor(CaveRoomZheng.WEST) != null && cr.getDoor(CaveRoomZheng.WEST).isOpen())
+							wall = "  "+contents+" ";
+						else
+							wall = "| "+contents+" ";
+					}
 					else if(textRow == 2)
-						if(cr.getDoor(CaveRoomZheng.SOUTH) != null)
-							wall = "|_ _";
+						if(cr.getDoor(CaveRoomZheng.SOUTH) != null && cr.getDoor(CaveRoomZheng.SOUTH).isOpen())
+							wall = "|_ _"; 
 						else
 							wall = "|___";
 					

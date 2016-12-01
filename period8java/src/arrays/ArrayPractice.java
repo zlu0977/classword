@@ -7,7 +7,7 @@ public class ArrayPractice {
 	static String[] someStrings;
 	
 	public static void main(String[] args) {                                                       
-		int[] fiftyNumbers = new int[100];
+		/*int[] fiftyNumbers = new int[100];
 		int numberOfDice = 4;
 		
 		populate(fiftyNumbers);
@@ -16,8 +16,29 @@ public class ArrayPractice {
 		//print(fiftyNumbers);
 		rollDice(fiftyNumbers, numberOfDice);
 		//print(fiftyNumbers);
-		countResult(fiftyNumbers, numberOfDice);
+		countResult(fiftyNumbers, numberOfDice);*/
+		//listPrimes(120);
+
 	}
+	
+	private static void listPrimes(int limit)
+	{
+		int lastInt = (int)(Math.sqrt(limit));
+		boolean[] numbers = new boolean[limit + 1];
+		
+		for(int prime = 2; prime < lastInt; prime++)
+			if(!numbers[prime])
+				for(int i = prime * prime; i < limit + 1; i += prime)
+					numbers[i] = true;
+		
+		
+		System.out.println("Primes are:");
+		for(int i = 2; i < limit + 1; i ++)
+			if(!numbers[i])
+				System.out.print(i + ", ");
+	}
+	
+	
 	
 	private static void countResult(int[] fiftyNumbers, int numberOfDice) {
 		int min = 1 * numberOfDice;

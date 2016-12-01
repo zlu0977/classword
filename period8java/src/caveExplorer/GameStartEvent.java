@@ -2,7 +2,7 @@ package caveExplorer;
 
 public class GameStartEvent implements Playable {
 
-	private static final String[] SEQUENCE_1 = {"HELLOOOOOOOOOOOOOOO", "HOWS IT GOING", "COME SOLVE ME PUZZLES"};
+	private static final String[] SEQUENCE_1 = {"HELLOOOOOOOOOOOOOOO", "HOWS IT GOING"};
 	private static final String[] SEQUENCE_2 = {"U ARE GOING TO HAVE SOOOOOOOOOO MUCH FUN", "TAKE THIS MAP YO"};
 	
 	public GameStartEvent() {
@@ -11,6 +11,7 @@ public class GameStartEvent implements Playable {
 
 	public void play() {
 		readSequence(SEQUENCE_1);
+		System.out.println("CAN YOU COME SOLVE ME PUZZLES?");
 		while(CaveExplorer.in.nextLine().toLowerCase().indexOf("yes") < 0)
 			System.out.println("JUST SAY YES");
 		
