@@ -5,13 +5,9 @@ import java.awt.Graphics;
 
 import javax.swing.JFrame;
 
-public class GuiApplication  extends JFrame{
+public abstract class GuiApplication  extends JFrame{
 	
 	private Screen currentScreen;
-	
-	public static void main(String[] args) {
-		new GuiApplication();
-	}
 	
 	public GuiApplication()
 	{
@@ -26,12 +22,14 @@ public class GuiApplication  extends JFrame{
 		setBackground(Color.pink);
 		//setResizable(false);
 		setVisible(true);
+		
 	}
 
-	protected void initScreen() {
-		Screen startScreen = new Screen(getWidth(), getHeight());
-		currentScreen =startScreen;
-		
+	protected abstract void initScreen();
+	
+	public void setScreen(Screen screen)
+	{
+		currentScreen = screen;
 	}
 	
 	public void paint(Graphics g)
