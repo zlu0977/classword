@@ -23,8 +23,9 @@ public abstract class Screen {
 		this.width = width;
 		this.height = height;
 		
-		initImage();
 		initObjects(viewObjects);
+		initImage();
+		
 	}
 
 	public abstract void initObjects(ArrayList<Visible> viewObjects2);
