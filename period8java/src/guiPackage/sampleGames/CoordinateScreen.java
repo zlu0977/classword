@@ -18,7 +18,7 @@ public class CoordinateScreen extends Screen {
 
 	public void initObjects(ArrayList<Visible> viewObjects) {
 		label = new TextLabel(25, 25, 760, 40, "POTATO");
-		TextArea paragraph = new TextArea(40, 85, 760, 500, "THIS IS A PARAGRAPH AGFIEGUF GEIGF IEWFGIEU GFIUEGF IUGEF UIG gjig jsrtgj rtjg;sg jsio;gj");
+		TextArea paragraph = new TextArea(40, 85, 500, 300, "THIS IS A PARAGRAPH THOS OS O POROGROPH THES ES E PEREHREPH THAS AS A PARAGRAPH THUS US U PURUGRAPH. THIS IS A PARAGRAPH THOS OS O POROGROPH THES ES E PEREHREPH THAS AS A PARAGRAPH THUS US U PURUGRAPH");
 		viewObjects.add(label);
 		viewObjects.add(paragraph);
 	}

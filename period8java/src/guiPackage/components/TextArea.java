@@ -18,7 +18,7 @@ public class TextArea extends TextLabel {
 	{
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setColor(Color.cyan);
-		g.setFont(new Font(getFont(), Font.BOLD, getSize()));
+		g.setFont(new Font(getFont(), Font.PLAIN, getSize()));
 		FontMetrics fm = g.getFontMetrics();
 		
 		if(getText() != null)
@@ -32,21 +32,25 @@ public class TextArea extends TextLabel {
 			{
 				String word = words[i];
 				
-				int wordWidth = fm.stringWidth(word);
-				if(pixelSum + wordWidth > getWidth())
+				int wordWidth = fm.stringWidth(word + " ");
+				System.out.println(word + " " + wordWidth);
+				if(pixelSum + wordWidth >= getWidth())
 				{
-					newString += "/n";
+					newString += "\n";
 					pixelSum = 0;
 					i--;
 				}
 				else
 				{
-					newString += word;
-					newString += " ";
-					pixelSum += (wordWidth + 1);
+					newString += word + " ";
+					pixelSum += wordWidth;
 				}
 			}
-			g.drawString(newString, 4, getHeight() - 5);
+			
+			String[] newLines = newString.split("\n");
+			
+			for(int i = 0; i < newLines.length; i++)
+				g.drawString(newLines[i], getX(), getY() + (i * fm.getHeight()));
 		}
 	}
 }
