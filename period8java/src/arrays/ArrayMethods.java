@@ -15,6 +15,7 @@ public class ArrayMethods {
       * */
     	
     	int[] stuff = {4, 1, 6, 7, 16, 765, 656, 5, 25, 2};
+<<<<<<< HEAD
     	int[] stuff2 = {10, 9, 8, 7, 6, 5};
     	//reverseOrder(stuff);
     	//ArrayPractice.print(stuff);
@@ -27,6 +28,22 @@ public class ArrayMethods {
     	else
     		System.out.print("not");*/
     		
+=======
+    	int[] stuff2 = {1,3,5,3,4};
+    	int[] stuff3 = {3,5,0,3,5,3};
+    	//reverseOrder(stuff);
+    	//ArrayPractice.print(stuff);
+    	
+    	//System.out.print(searchUnsorted(stuff, 11));
+    	//System.out.print(searchSorted(stuff2, 10));
+    	
+    	/*if(isSorted(stuff2))
+    		System.out.print("sorteed");
+    	else
+    		System.out.print("not");*/
+    	
+    	System.out.println(longestSharedSequence(stuff2, stuff3));	
+>>>>>>> refs/remotes/origin/master
     		
     }
     
@@ -137,10 +154,15 @@ public class ArrayMethods {
 	    
 	     while(array.length > 2)
 	     {
+<<<<<<< HEAD
 	    	 int minIndex = indexOf(array, min, 0); 
 	    	 array = excludeFromArray(array, minIndex);
 	    	 int maxIndex = indexOf(array, max, 0);
 	    	 array = excludeFromArray(array, maxIndex);
+=======
+	    	 array = excludeFromArray(array, min);
+	    	 array = excludeFromArray(array, max);
+>>>>>>> refs/remotes/origin/master
 	    	 
 	    	 double[] minMax = getMinMax(array);
 	    	 min = minMax[0];
@@ -244,6 +266,7 @@ public class ArrayMethods {
          *          since the sequence '9,6,3,4,3' is in both arrays and is 5 integers long, it doesn't matter that the sequence begins at different indices 
          * longestSequence({9,6,1,4,3,6,7,9}, {9,6,5,8,3,6,7,0}) returns '3', since the sequence '3,6,7' is in both arrays and is 3 integers long
          * */
+<<<<<<< HEAD
     	int longestSeq = 1;
     	for(int i = 0; i < array1.length; i++)
     	{
@@ -293,9 +316,104 @@ public class ArrayMethods {
     	}
     	
     	return longestSeq;
+=======
+    	/*int longestSeq = 1;
+    	for(int i = 0; i < array1.length; i++)
+    	{
+    		int numIndex = 0;
+    		int target = array1[i];
+    		int currentSeq = 1;
+    		boolean isFinished1 = false;
+        			
+    		while(!isFinished1)
+    		{
+    			boolean isFinished2 = false;
+    			numIndex = indexOf(array2, target, numIndex);
+    			if(numIndex < 0)
+    				isFinished1 = true;
+    			else
+    			{
+    				while(!isFinished2)
+    				{
+    					if(i != array1.length - 1 && numIndex != array2.length - 1 && array1[i + 1] == array2[numIndex + 1])
+    					{
+    						currentSeq ++;
+    						i++;
+    					}
+    					else
+    					{
+    						if(currentSeq > longestSeq)
+    	        				longestSeq = currentSeq;
+    	        			
+    	        			isFinished2 = true;
+    					}
+    					
+	    				numIndex ++;
+    				}
+    				
+    				if(numIndex >= array2.length)
+    					isFinished1 = true;
+    			}
+    		}
+    	}
+    	
+    	return longestSeq;*/
+    	 
+    	 int max = 0;
+    	 for(int seqStart = 0; seqStart < array1.length; seqStart++)
+    	 {
+    		 int seqEnd = seqStart;
+    		 boolean inLoop = true;
+    		 while(inLoop)
+    		 {
+	    		 int[] seq = getSequence(seqStart, seqEnd, array1);
+	    		// ArrayPractice.print(seq);
+	    		 if(checkSequence(seq, array2))
+	    		 {
+	    			 if(seq.length > max)
+	    				 max = seq.length;
+	    			 
+	    			 if(seqEnd < array1.length)
+	    				 seqEnd ++;
+	    			 else
+	    				 inLoop = false;
+	    		 }
+	    		 else
+	    			 inLoop = false;
+    		 }
+    	 }
+    	 
+    	 return max;
+>>>>>>> refs/remotes/origin/master
     }
 
-    public static int[] generateDistinctItemsList(int n){
+    private static boolean checkSequence(int[] seq, int[] array2) {
+		A:for(int i = 0; i < array2.length; i++)
+			B:for(int j = 0; j < seq.length; j++)
+				if((j+i) < array2.length && array2[j + i] != seq[j])
+					break B;
+				else if(j == seq.length-1)
+					return true;
+		
+		return false;
+	}
+    //0,3,5,3,4
+    //0,2
+	private static int[] getSequence(int seqStart, int seqEnd, int[] array1) {
+		
+		int[] seq = new int[seqEnd - seqStart + 1];
+		int j = 0;
+		for(int i = seqStart; i <= seqEnd; i++)
+		{
+			seq[j] = array1[i];
+			//j++;
+			
+			System.out.println(i);
+		}
+		return seq;
+	}
+
+	public static int[] generateDistinctItemsList(int n){
         /**
          * This method needs to generate an int[] of length n that contains distinct, random integers
          * between 1 and 2n 
@@ -400,6 +518,7 @@ public class ArrayMethods {
     	return minMax;
     }
     
+<<<<<<< HEAD
     private static double[] excludeFromArray(double[] array, int exclude)
     {
     	double[] newArray = new double[array.length - 1];
@@ -416,3 +535,56 @@ public class ArrayMethods {
     	return newArray;
     }
 }
+=======
+    private static double[] excludeFromArray(double[] array, double exclude)
+    {
+    	double[] newArray = new double[array.length - 1];
+    	int newIndex = 0;
+    	boolean isExcluded = false;
+    	for(int i = 0; i < array.length; i++)
+    		
+    		if(array[i] == exclude && !isExcluded)
+    			isExcluded = true;
+    		else
+	    		newArray[newIndex] = array[i];
+    	
+	    	newIndex ++;
+
+    	
+    	return newArray;
+    }
+}
+
+
+/*
+private static double[] excludeFromArray(double[] array, int exclude)
+{
+	double[] newArray = new double[array.length - 1];
+	int newIndex = 0;
+	
+	for(int i = 0; i < array.length; i++)
+    	if(i != exclude)
+    	{
+    		newArray[newIndex] = array[i];
+    		newIndex ++;
+    	}
+	
+	return newArray;
+}
+
+*
+*
+*while(array.length > 2)
+	     {
+	    	 int minIndex = indexOf(array, min, 0); 
+	    	 array = excludeFromArray(array, minIndex);
+	    	 int maxIndex = indexOf(array, max, 0);
+	    	 array = excludeFromArray(array, maxIndex);
+	    	 
+	    	 double[] minMax = getMinMax(array);
+	    	 min = minMax[0];
+	    	 max = minMax[1];
+	     }
+*
+*/
+>>>>>>> refs/remotes/origin/master
