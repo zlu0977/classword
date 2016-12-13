@@ -12,11 +12,11 @@ public class ArrayPractice {
 		
 		populate(fiftyNumbers);
 		//print(fiftyNumbers);
-		randomize(fiftyNumbers, 500);
+		randomize(fiftyNumbers, 20);
+		print(fiftyNumbers);
+	//	rollDice(fiftyNumbers, numberOfDice);
 		//print(fiftyNumbers);
-		rollDice(fiftyNumbers, numberOfDice);
-		//print(fiftyNumbers);
-		countResult(fiftyNumbers, numberOfDice);
+		//countResult(fiftyNumbers, numberOfDice);
 	}
 	
 	private static void countResult(int[] fiftyNumbers, int numberOfDice) {
@@ -48,6 +48,14 @@ public class ArrayPractice {
 	}
 
 	private static void randomize(int[] fiftyNumbers, int max) {
+		for(int i = 0; i < fiftyNumbers.length; i++)
+		{
+			int randNum = ((int)(Math.random() * max) + 1);
+			fiftyNumbers[i] = randNum;
+		}
+	}
+	
+	public static void randomize(double[] fiftyNumbers, int max) {
 		for(int i = 0; i < fiftyNumbers.length; i++)
 		{
 			int randNum = ((int)(Math.random() * max) + 1);
@@ -91,11 +99,16 @@ public class ArrayPractice {
 			System.out.println(s[i]);
 	}
 	
-	private static void print(int[] s) {
+	public static void print(int[] s) {
 		for(int i = 0; i < s.length; i ++)
 			System.out.println(s[i]);
 	}
-
+	
+	public static void print(double[] s) {
+		for(int i = 0; i < s.length; i ++)
+			System.out.println(s[i]);
+	}
+	
 	private static void makeSpecial(int i) {
 		someStrings[i] = "SPECIAL";
 	}

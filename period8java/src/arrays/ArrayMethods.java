@@ -13,6 +13,21 @@ public class ArrayMethods {
       * DO NOT spend hours and hours trying to fix perfect code just because my test
       * says that it isn't perfect!
       * */
+    	
+    	int[] stuff = {4, 1, 6, 7, 16, 765, 656, 5, 25, 2};
+    	int[] stuff2 = {10, 9, 8, 7, 6, 5};
+    	//reverseOrder(stuff);
+    	//ArrayPractice.print(stuff);
+    	
+    	//System.out.print(searchUnsorted(stuff, 11));
+    	//System.out.print(searchSorted(stuff2, 10));
+    	
+    	/*if(isSorted(stuff2))
+    		System.out.print("sorteed");
+    	else
+    		System.out.print("not");*/
+    		
+    		
     }
     
     public static int searchUnsorted(int[] arrayToSearch, int key){
@@ -36,16 +51,25 @@ public class ArrayMethods {
      * 
      * Note: You should attempt to write a method that is more efficient that searchUnsorted
      * */
-    	boolean isFound = false;
-    	int targetIndex = sortedArrayToSearch.length/2;
-    	
-    	while(!isFound)
+    	boolean isFinished = false;
+    	int minIndex = 0;
+    	int maxIndex = sortedArrayToSearch.length - 1;
+
+    	while(!isFinished)
     	{
+    		int targetIndex = maxIndex - ((int)((maxIndex-minIndex)/2));
+    		if(minIndex == 0 && maxIndex == 1)
+    			targetIndex = 0;
+    		
     		if(sortedArrayToSearch[targetIndex] == key)
-    		{
-    			isFound = true;
     			return targetIndex;
-    		}
+    		else if(sortedArrayToSearch[targetIndex] > key)
+    			minIndex = targetIndex;
+    		else if(sortedArrayToSearch[targetIndex] < key)
+    			maxIndex = targetIndex;
+    		
+    		if(minIndex >= maxIndex)
+    			isFinished = true;
     	}
     	
     	return -1;
@@ -55,7 +79,12 @@ public class ArrayMethods {
         /**
          * This method takes an in array as a parameter and returns 'true' if the array is already sorted in DESCENDING order
          * */
-        return false;
+    	for(int i = 0; i < array.length; i++)
+    		if(i != array.length - 1)
+    			if(array[i] < array[i + 1])
+	    			return false;
+    	
+        return true;
     }
     
     
@@ -70,8 +99,62 @@ public class ArrayMethods {
          * index 4 = the number of values greater than or equal to the mean
          * index 5 = the number of values below the mean
          * */
-         double[] stats = new double[6];
-         return stats;
+	     double[] stats = new double[6];
+	     
+	     double mean = 0;
+	     double max = 0;
+	     double min = array[0];
+	     double median = 0;
+	     double meanPlus = 0;
+	     double meanMinus = 0;
+	     
+	     for(int i = 0; i < array.length; i++)
+	     {
+	     	mean += array[i];
+	     	
+	     	if(max < array[i])
+				max = array[i];
+			
+			if(min > array[i])
+				min = array[i];
+	     }
+	     
+	     mean = mean/array.length;
+	     stats[0] = mean;
+	     stats[1] = max;
+	     stats[2] = min;
+	     
+	     for(double num : array)
+	     {
+	    	 if(num < mean)
+	    		 meanMinus ++;
+	    	 else
+	    		 meanPlus ++;
+	     }
+	     
+	     stats[4] = meanPlus;
+	     stats[5] = meanMinus;
+	    
+	     while(array.length > 2)
+	     {
+	    	 int minIndex = indexOf(array, min, 0); 
+	    	 array = excludeFromArray(array, minIndex);
+	    	 int maxIndex = indexOf(array, max, 0);
+	    	 array = excludeFromArray(array, maxIndex);
+	    	 
+	    	 double[] minMax = getMinMax(array);
+	    	 min = minMax[0];
+	    	 max = minMax[1];
+	     }
+	     
+	     if(array.length == 2)
+	    	 median = (array[0] + array[1])/2;
+	     else
+	    	 median = array[0];
+	     
+	     stats[3] = median;
+	     
+	     return stats;
     }
     
     public static void reverseOrder(int[] array){
@@ -87,6 +170,14 @@ public class ArrayMethods {
          * array = {-6, 16, 10, 9, 1, 5}
          * 
          * */
+    	
+    	int temp;
+    	for(int i = 0; i < array.length/2; i++)
+    	{
+    		temp = array[i];
+    		array[i] = array[array.length-1-i];
+    		array[array.length-1-i] = temp;
+    	}
     }
     
     public static int countDifferences(int[] array1, int[] array2){
@@ -100,7 +191,14 @@ public class ArrayMethods {
          * countDifferences({1,2,3},{1,3,2}) returns 2, since '2' and '3' are both present, but different locations
          * 
          * */
-         return 0;
+        int differences = 0;
+    	for(int i = 0; i < array1.length; i++)
+    	{
+    		if(array1[i] != array2[i])
+    			differences ++;
+    	}
+    	
+        return differences;
     }
     
 
@@ -114,11 +212,28 @@ public class ArrayMethods {
          * longestSequence({0,9,10,11,4,3,8,9}) returns '3', since '9,10,11' is 3 integers long
          * longestSequence({0,9,8,11,4,3,7,9}) returns '1', since there are no consecutive integers
          * */
+    	
+    	int longestSeq = 1;
+    	int currentSeq = 1;
+    	
+    	for(int i = 0; i < array1.length; i++)
+    	{
+    		if(i != array1.length - 1 && array1[i] + 1 == array1[i + 1])
+    			currentSeq ++;
+    		else
+    		{
+    			if(currentSeq > longestSeq)
+    				longestSeq = currentSeq;
+    			
+    			currentSeq = 1;
+    		}
+    			
+    	}
         
-        return 0;
+        return longestSeq;
     }
 
-    public static int longestSharedSequence(int[] array1, int[] array2){
+     public static int longestSharedSequence(int[] array1, int[] array2){
         /**This method counts the longest unbroken, shared sequence in TWO arrays.
          * The sequence does NOT have to be a consecutive sequence
          * It does NOT matter where the sequence begins, the arrays might not be the same length
@@ -129,8 +244,55 @@ public class ArrayMethods {
          *          since the sequence '9,6,3,4,3' is in both arrays and is 5 integers long, it doesn't matter that the sequence begins at different indices 
          * longestSequence({9,6,1,4,3,6,7,9}, {9,6,5,8,3,6,7,0}) returns '3', since the sequence '3,6,7' is in both arrays and is 3 integers long
          * */
-        
-        return 0;
+    	int longestSeq = 1;
+    	for(int i = 0; i < array1.length; i++)
+    	{
+    		int numIndex = 0;
+    		int target = array1[i];
+    		int currentSeq = 1;
+    		boolean isFinished1 = false;
+        			
+    		while(!isFinished1)
+    		{
+    			boolean isFinished2 = false;
+    			numIndex = indexOf(array2, target, numIndex);
+    			if(numIndex < 0)
+    				isFinished1 = true;
+    			else
+    			{
+    				while(!isFinished2)
+    				{
+    					if(i != array1.length - 1 && numIndex != array2.length - 1)
+	    					if(array1[i + 1] == array2[numIndex + 1])
+	    					{
+	    						currentSeq ++;
+	    						i++;
+	    					}
+	    					else
+	    					{
+	    						if(currentSeq > longestSeq)
+	    	        				longestSeq = currentSeq;
+	    	        			
+	    	        			isFinished2 = true;
+	    					}
+    					else
+    					{
+    						if(currentSeq > longestSeq)
+    	        				longestSeq = currentSeq;
+    	        			
+    	        			isFinished2 = true;
+    					}
+    					
+	    				numIndex ++;
+    				}
+    				
+    				if(numIndex >= array2.length)
+    					isFinished1 = true;
+    			}
+    		}
+    	}
+    	
+    	return longestSeq;
     }
 
     public static int[] generateDistinctItemsList(int n){
@@ -141,7 +303,25 @@ public class ArrayMethods {
          * contains only entries between 1 and 2n (inclusive) and has no duplicates
          * 
          * */
-        return null; 
+        boolean isDuplicate = false;
+    	int randNum = 0;
+    	int[] newArray = new int[n];
+    	for(int i = 0; i < n; i ++)
+    	{
+    		do
+    		{
+	    		randNum = (int)(Math.random() * 2 * n) + 1;
+	    		
+	    		isDuplicate = false;
+	    		for(int j = 0; j < n; j ++)
+	    			if(newArray[j] == randNum)
+	    				isDuplicate = true;
+	    		
+    		}while(isDuplicate);
+    		
+    		newArray[i] = randNum;
+    	}
+        return newArray; 
     }
     
     
@@ -168,7 +348,71 @@ public class ArrayMethods {
          * CHALLENGE
          * For extra credit, make your method handle NEGATIVE n
          * */
+         while(n > 0)
+    	{
+    		int first = array[0];
+    		
+    		for(int i = 0; i < array.length; i++)
+    			if(i < array.length - 1)
+    				array[i] = array[i + 1];
+    		
+    		array[array.length - 1] = first;
+    		n --;
+    	}
     }
     
-
+    private static int indexOf(int[] array, int key, int start)
+    {
+    	for(int i = start; i < array.length; i++)
+	    	if(array[i] == key)
+	    		return i;
+    	
+    	return -1;
+    }
+    
+    private static int indexOf(double[] array, double key, int start)
+    {
+    	for(int i = start; i < array.length; i++)
+	    	if(array[i] == key)
+	    		return i;
+    	
+    	return -1;
+    }
+    
+    private static double[] getMinMax(double[] array)
+    {
+    	double[] minMax = new double[2];
+    	double min = array[0];
+    	double max = 0;
+    	
+    	for(int i = 0; i < array.length; i++)
+    	{
+    		if(max < array[i])
+				max = array[i];
+			
+			if(min > array[i])
+				min = array[i];
+    	}
+    	
+    	minMax[0] = min;
+    	minMax[1] = max;
+    	
+    	return minMax;
+    }
+    
+    private static double[] excludeFromArray(double[] array, int exclude)
+    {
+    	double[] newArray = new double[array.length - 1];
+    	int newIndex = 0;
+    	
+    	for(int i = 0; i < array.length; i++)
+	    	if(i != exclude)
+	    	{
+	    		//System.out.println(newIndex + "");
+	    		newArray[newIndex] = array[i];
+	    		newIndex ++;
+	    	}
+    	
+    	return newArray;
+    }
 }
