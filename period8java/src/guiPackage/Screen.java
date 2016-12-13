@@ -1,6 +1,8 @@
 package guiPackage;
 
 import java.awt.image.BufferedImage;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import guiPackage.components.Visible;
@@ -37,6 +39,8 @@ public abstract class Screen {
 
 	public void update() {
 		Graphics2D g = image.createGraphics();
+		g.setColor(Color.pink);
+		g.fillRect(0, 0, image.getWidth(), image.getHeight());
 		g.setColor(Color.blue);
 		g.setFont(new Font("Helvetica", Font.BOLD, 50));
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -72,5 +76,13 @@ public abstract class Screen {
 	public BufferedImage getImage()
 	{
 		return image;
+	}
+
+	public MouseListener getMouseListener() {
+		return null;
+	}
+
+	public MouseMotionListener getMouseMotionListener() {
+		return null;
 	}
 }
