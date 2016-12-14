@@ -1,11 +1,14 @@
 package guiPackage.sampleGames;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import guiPackage.Screen;
+import guiPackage.components.Button;
+import guiPackage.components.Action;
 import guiPackage.components.TextArea;
 import guiPackage.components.TextLabel;
 import guiPackage.components.Visible;
@@ -14,6 +17,8 @@ public class CoordinateScreen extends Screen implements MouseMotionListener, Mou
 
 	private TextLabel label;
 	private TextArea paragraph;
+	private Button myButton;
+	
 	public CoordinateScreen(int width, int height) {
 		super(width, height);
 		
@@ -21,9 +26,15 @@ public class CoordinateScreen extends Screen implements MouseMotionListener, Mou
 
 	public void initObjects(ArrayList<Visible> viewObjects) {
 		label = new TextLabel(40, 45, 760, 40, "POTATO");
-		paragraph = new TextArea(40, 85, 700, 500, "THIS IS A PARAGRAPH THOS OS O POROGROPH THES ES E PEREHREPH THAS AS A PARAGRAPH THUS US U PURUGRAPH. THIS IS A PARAGRAPH THOS OS O POROGROPH THES ES E PEREHREPH THAS AS A PARAGRAPH THUS US U PURUGRAPH");
+		paragraph = new TextArea(40, 85, 700, 500, "THIS IS A PARAGRAPH THOS OS O POROGROPH THES ES E PEREHREPH THAS AS A PARAGRAPH");
+		myButton = new Button(40,300,100,50,"ButtonZ", new Color(0,76,153), new Action(){
+			public void act(){
+				System.out.println("PRESSED");
+			}
+			});
 		viewObjects.add(label);
 		viewObjects.add(paragraph);
+		viewObjects.add(myButton);
 	}
 
 	@Override
@@ -52,7 +63,8 @@ public class CoordinateScreen extends Screen implements MouseMotionListener, Mou
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if(myButton.isHovered(e.getX(), e.getY()))
+			myButton.act();
 		
 	}
 
