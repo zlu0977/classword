@@ -2,6 +2,7 @@ package guiPackage.components;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
@@ -12,27 +13,50 @@ public class Button extends TextLabel implements Clickable{
 	
 	public Button(int x, int y, int width, int height, String text, Color color, Action action) {
 		super(x, y, width, height, text);
+		setColor(color);
+		setAction(action);
+	}
+	
+	public Color getColor() {
+		return color;
+	}
+	
+	public void setColor(Color color) {
 		this.color = color;
+		update();
+	}
+	
+	public void setAction(Action action) {
 		this.action = action;
 	}
 	
 	@Override
 	public void update(Graphics2D g)
 	{
-		g = clear();
+		//g = clear();
 		
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		FontMetrics fm = g.getFontMetrics();
 		
 		g.setColor(color);
-		g.fillRoundRect(0, 0, getWidth() - 5, getHeight() - 5, 25, 25);
+		g.fillRoundRect(0, 0, getWidth() - 2, getHeight() - 2, 25, 25);
 		
 		g.setColor(Color.black);
-		g.drawRoundRect(0, 0, getWidth() - 5, getHeight() - 5, 25, 25);
+		g.drawRoundRect(0, 0, getWidth() - 2, getHeight() - 2, 25, 25);
 		
 		if(getText() != null)
 		{
+			int cutoff = getText().length();
+			String t = getText();
+			while(cutoff > 0 && fm.stringWidth(t) > getWidth())
+			{
+				cutoff --;
+				t = t.substring(0, cutoff);
+			}
+			
+			
 			g.setFont(new Font(getFont(), Font.PLAIN, getSize()));
-			g.drawString(getText(), 4, getHeight() - 5);
+			g.drawString(t, (getWidth() - fm.stringWidth(t))/3, (getHeight() + fm.getHeight() - fm.getDescent())/2);
 		}
 	}
 
