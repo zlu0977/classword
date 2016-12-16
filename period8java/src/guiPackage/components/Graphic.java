@@ -1,6 +1,9 @@
 package guiPackage.components;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+
+import javax.swing.ImageIcon;
 
 public class Graphic implements Visible {
 	
@@ -16,47 +19,63 @@ public class Graphic implements Visible {
 		this.y = y;
 		
 		loadedImages = false;
-		loadImages(imageLocation, 0.0);
+		loadImages(imageLocation, 0 , 0);
 	}
 
-	private void loadImages(String imageLocation, double d) {
+	private void loadImages(String imageLocation, int w, int h) {
+		try
+		{
+			ImageIcon icon = new ImageIcon(imageLocation);
+			
+			if(w == 0 && h == 0)
+			{
+				image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+				Graphics2D g = image.createGraphics();
+				g.drawImage(icon.getImage(), 0, 0, null);
+			}
+			else
+			{
+				
+			}
+			
+			loadedImages = true;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+	private void loadImages(String imageLocation, double scale) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public BufferedImage getImage() {
-		// TODO Auto-generated method stub
-		return null;
+		return image;
 	}
 
 	@Override
 	public int getX() {
-		// TODO Auto-generated method stub
-		return 0;
+		return x;
 	}
 
 	@Override
 	public int getY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return y;
 	}
 
 	@Override
 	public int getWidth() {
-		// TODO Auto-generated method stub
-		return 0;
+		return image.getWidth();
 	}
 
 	@Override
 	public int getHeight() {
-		// TODO Auto-generated method stub
-		return 0;
+		return image.getHeight();
 	}
 
 	@Override
 	public boolean isAnimated() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

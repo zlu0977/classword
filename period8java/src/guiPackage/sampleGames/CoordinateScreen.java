@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import guiPackage.Screen;
 import guiPackage.components.Button;
+import guiPackage.components.Graphic;
 import guiPackage.components.Action;
 import guiPackage.components.TextArea;
 import guiPackage.components.TextLabel;
@@ -18,7 +19,7 @@ public class CoordinateScreen extends Screen implements MouseMotionListener, Mou
 	private TextLabel label;
 	private TextArea paragraph;
 	private Button myButton;
-	
+	private Graphic graph;
 	public CoordinateScreen(int width, int height) {
 		super(width, height);
 		
@@ -32,9 +33,11 @@ public class CoordinateScreen extends Screen implements MouseMotionListener, Mou
 				System.out.println("PRESSED");
 			}
 			});
+		graph = new Graphic(0, 0, "sampleImages/Potato.png");
 		viewObjects.add(label);
 		viewObjects.add(paragraph);
 		viewObjects.add(myButton);
+		viewObjects.add(graph);
 	}
 
 	@Override
