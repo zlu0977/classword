@@ -30,14 +30,28 @@ public class CoordinateScreen extends Screen implements MouseMotionListener, Mou
 		paragraph = new TextArea(40, 85, 700, 500, "THIS IS A PARAGRAPH THOS OS O POROGROPH THES ES E PEREHREPH THAS AS A PARAGRAPH");
 		myButton = new Button(40,300,100,50,"ButtonZ", Color.green, new Action(){
 			public void act(){
+				
 				System.out.println("PRESSED");
+				myButton.setClicks(myButton.getClicks() + 1);
+				
+				if(myButton.getClicks()%2 == 1)
+				{
+					myButton.setColor(Color.red);
+				}
+				else
+				{
+					myButton.setColor(Color.green);
+				}
+				
+				MouseFollower.game.setScreen(MouseFollower.myScreen);
 			}
 			});
-		graph = new Graphic(0, 0, "sampleImages/Potato.png");
+		graph = new Graphic(10, 40, 1.5, "resources/sampleImages/Potato.png");
+		viewObjects.add(graph);
 		viewObjects.add(label);
 		viewObjects.add(paragraph);
 		viewObjects.add(myButton);
-		viewObjects.add(graph);
+		
 	}
 
 	@Override

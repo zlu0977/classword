@@ -72,7 +72,35 @@ public abstract class Screen {
 		}
 		
 	}
-
+	
+	public void remove(Visible v)
+	{
+		viewObjects.remove(v);
+		//for(int i = 0; i < list.size(); i ++)
+		//   if(list.get(i) > 5)
+		//      list.remove(i);
+		//      i--;
+		//
+	}
+	
+	public void moveToFront(Visible v)
+	{
+		if(viewObjects.contains(v))
+		{
+			viewObjects.remove(v);
+			viewObjects.add(v);
+		}
+	}
+	
+	public void moveToBack(Visible v)
+	{
+		if(viewObjects.contains(v))
+		{
+			viewObjects.remove(v);
+			viewObjects.add(0, v);
+		}
+	}
+	
 	public BufferedImage getImage()
 	{
 		return image;

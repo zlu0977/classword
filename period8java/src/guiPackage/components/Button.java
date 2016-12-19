@@ -10,11 +10,22 @@ public class Button extends TextLabel implements Clickable{
 	
 	private Color color;
 	private Action action;
+	private int clicks = 0;
 	
 	public Button(int x, int y, int width, int height, String text, Color color, Action action) {
 		super(x, y, width, height, text);
 		setColor(color);
 		setAction(action);
+	}
+	
+	public int getClicks()
+	{
+		return clicks;
+	}
+	
+	public void setClicks(int clicks)
+	{
+		this.clicks = clicks;
 	}
 	
 	public Color getColor() {

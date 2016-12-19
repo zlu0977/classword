@@ -4,11 +4,14 @@ import guiPackage.GuiApplication;
 import guiPackage.Screen;
 
 public class MouseFollower extends GuiApplication {
-
-	private Screen coordScreen;
+	
+	public static MouseFollower game;
+	public static MyScreen myScreen;
+	public static  Screen coordScreen;
 	
 	protected void initScreen() {
 		coordScreen = new CoordinateScreen(getWidth(), getHeight());
+		myScreen = new MyScreen(getWidth(), getHeight());
 		setScreen(coordScreen);
 	}
 	
