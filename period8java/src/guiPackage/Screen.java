@@ -16,6 +16,7 @@ public abstract class Screen {
 	
 	private int width;
 	private int height;
+	private Color color;
 	protected BufferedImage image;
 	private ArrayList<Visible> viewObjects;
 	
@@ -24,13 +25,28 @@ public abstract class Screen {
 		viewObjects = new ArrayList<Visible>();
 		this.width = width;
 		this.height = height;
-		
+		color = Color.pink;
 		initObjects(viewObjects);
 		initImage();
 		
 	}
+	public int getWidth()
+	{
+		return width;
+	}
+	
+	public int getHeight()
+	{
+		return height;
+	}
+	
+	public void setColor(Color color)
+	{
+		this.color = color;
+		update();
+	}
 
-	public abstract void initObjects(ArrayList<Visible> viewObjects2);
+	public abstract void initObjects(ArrayList<Visible> viewObjects);
 
 	private void initImage() {
 		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -39,7 +55,7 @@ public abstract class Screen {
 
 	public void update() {
 		Graphics2D g = image.createGraphics();
-		g.setColor(Color.pink);
+		g.setColor(color);
 		g.fillRect(0, 0, image.getWidth(), image.getHeight());
 		g.setColor(Color.blue);
 		g.setFont(new Font("Helvetica", Font.BOLD, 50));
@@ -106,11 +122,7 @@ public abstract class Screen {
 		return image;
 	}
 
-	public MouseListener getMouseListener() {
-		return null;
-	}
+	public abstract MouseListener getMouseListener();
 
-	public MouseMotionListener getMouseMotionListener() {
-		return null;
-	}
+	public abstract MouseMotionListener getMouseMotionListener();
 }

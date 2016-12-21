@@ -28,20 +28,20 @@ public class CoordinateScreen extends Screen implements MouseMotionListener, Mou
 	public void initObjects(ArrayList<Visible> viewObjects) {
 		label = new TextLabel(40, 45, 760, 40, "POTATO");
 		paragraph = new TextArea(40, 85, 700, 500, "THIS IS A PARAGRAPH THOS OS O POROGROPH THES ES E PEREHREPH THAS AS A PARAGRAPH");
-		myButton = new Button(40,300,100,50,"ButtonZ", Color.green, new Action(){
+		myButton = new Button(40,300,100,50,"ButtonA", Color.green, new Action(){
 			public void act(){
 				
 				System.out.println("PRESSED");
-				myButton.setClicks(myButton.getClicks() + 1);
-				
-				if(myButton.getClicks()%2 == 1)
-				{
-					myButton.setColor(Color.red);
-				}
-				else
-				{
-					myButton.setColor(Color.green);
-				}
+//				myButton.setClicks(myButton.getClicks() + 1);
+//				
+//				if(myButton.getClicks()%2 == 1)
+//				{
+//					myButton.setColor(Color.red);
+//				}
+//				else
+//				{
+//					myButton.setColor(Color.green);
+//				}
 				
 				MouseFollower.game.setScreen(MouseFollower.myScreen);
 			}

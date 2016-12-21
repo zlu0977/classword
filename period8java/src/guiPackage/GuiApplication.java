@@ -16,11 +16,11 @@ public abstract class GuiApplication  extends JFrame implements Runnable{
 		//setUndecorated(true);
 		int x = 0;
 		int y = 0;
-		int width = 800;
-		int height = 600;
+		int width = 1200;
+		int height = 900;
 		setBounds(x, y, width, height);
 		initScreen();
-		setBackground(Color.pink);
+		//setBackground(Color.pink);
 		//setResizable(false);
 		setVisible(true);
 		
