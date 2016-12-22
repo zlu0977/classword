@@ -97,7 +97,7 @@ public class Graphic implements Visible {
 		this.x = x;
 	}
 
-	public void sety(int y) {
+	public void setY(int y) {
 		this.y = y;
 	}
 	

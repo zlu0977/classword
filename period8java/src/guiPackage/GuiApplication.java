@@ -64,4 +64,6 @@ public abstract class GuiApplication  extends JFrame implements Runnable{
 			}
 		}
 	}
+	
+	
 }
