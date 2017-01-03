@@ -34,25 +34,6 @@ public class WackAMoleScreen extends ClickableScreen implements Runnable{
 		viewObjects.add(timeLabel);
 	}
 	
-	private PlayerInterface getAPlayer() {
-		return new Player(20,20);
-	}
-
-	private MoleInterface getAMole() {
-		Mole mole = new Mole((int)(Math.random() * getWidth() - Mole.moleWidth), (int)(Math.random() * getHeight() - Mole.moleHeight));
-		mole.setTime(500 + (int)(Math.random() * 2000));
-		mole.setAction(new Action(){
-			public void act()
-			{
-				player.increaseScore(1);
-				remove(mole);
-				moles.remove(mole);
-			}
-		});
-		addObject(mole);
-		return mole;
-	}
-	
 	private void changeText(String s)
 	{
 		try {
@@ -82,14 +63,18 @@ public class WackAMoleScreen extends ClickableScreen implements Runnable{
 			
 			removeMole();
 			addMole();
-			
-			try {
-				Thread.sleep(100);
-				moles.add(getAMole());
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 		}
+		removeAllMole();
+	}
+
+	private void removeAllMole() {
+		for(int i = 0; i < moles.size(); i++)
+		{
+			MoleInterface mole = moles.get(i);
+			remove(mole);
+			moles.remove(i);
+		}
+		
 	}
 
 	private void addMole() {
@@ -113,5 +98,24 @@ public class WackAMoleScreen extends ClickableScreen implements Runnable{
 				i--;
 			}
 		}
+	}
+	
+	private PlayerInterface getAPlayer() {
+		return new Player(20,20);
+	}
+
+	private MoleInterface getAMole() {
+		Mole mole = new Mole((int)(Math.random() * getWidth()), (int)(Math.random() * getHeight()));
+		mole.setTime(500 + (int)(Math.random() * 2000));
+		mole.setAction(new Action(){
+			public void act()
+			{
+				player.increaseScore(1);
+				remove(mole);
+				moles.remove(mole);
+			}
+		});
+		add(mole);
+		return mole;
 	}
 }

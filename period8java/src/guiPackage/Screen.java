@@ -82,14 +82,15 @@ public abstract class Screen {
 	}
 	
 	private void drawAllVisibleComponents(Graphics2D g) {
-		for(Visible v: viewObjects)
+		for(int i = 0; i < viewObjects.size(); i++)
 		{
+			Visible v = viewObjects.get(i);
 			g.drawImage(v.getImage(), v.getX(), v.getY(), null);
 		}
 		
 	}
 	
-	public void addObject(Visible v)
+	public void add(Visible v)
 	{
 		viewObjects.add(v);
 	}
@@ -98,10 +99,14 @@ public abstract class Screen {
 	{
 		viewObjects.remove(v);
 		//for(int i = 0; i < list.size(); i ++)
-		//   if(list.get(i) > 5)
+		//   while(list.get(i) > 5)
 		//      list.remove(i);
-		//      i--;
 		//
+		//does not work
+		//for(Integer i: list)
+		//	if(i > 5) list.remove(i);
+		//
+		//syso(list.remove(0) + " is removed");
 	}
 	
 	public void moveToFront(Visible v)
