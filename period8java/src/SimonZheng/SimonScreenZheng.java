@@ -77,12 +77,22 @@ public class SimonScreenZheng extends ClickableScreen implements Runnable {
 		showMoves();
 		
 		changeText("Your Turn");
+		playerTurn();
 		
 	}
 	
 	
-	
-	
+	private void playerTurn() {
+		ArrayList<MoveInterface> playerMoves = new ArrayList<MoveInterface>();
+		boolean gettingPlayerMoves = true;
+		
+		while(gettingPlayerMoves)
+		{
+			
+		}
+		
+	}
+
 	private void showMoves() {
 		for(MoveInterface move: moveList)
 		{
