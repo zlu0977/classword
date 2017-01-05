@@ -49,6 +49,7 @@ public class CoordinateScreen extends Screen implements MouseMotionListener, Mou
 			});
 		
 		MovingComponent blackBall = new MovingComponent(100, 100, 80, 80);
+		
 		graph = new Graphic(10, 40, 1.5, "resources/sampleImages/Potato.png");
 		
 		viewObjects.add(graph);

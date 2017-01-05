@@ -63,7 +63,7 @@ public class MovingComponent extends Component implements Runnable {
 			if(getX() > MouseFollower.coordScreen.getWidth() - getWidth()|| getX() < 0)
 				vx = -1 * vx;
 			
-			if(getY() > MouseFollower.coordScreen.getHeight() || getY() < 0)
+			if(getY() > MouseFollower.coordScreen.getHeight() - getHeight()|| getY() < 0)
 				vy = -1 * vy;
 		}
 	}
