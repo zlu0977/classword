@@ -98,12 +98,7 @@ public class SimonScreenZheng extends ClickableScreen implements Runnable {
 	private void showMoves() {
 		for(MoveInterface move: moveList)
 		{
-			try {
-				move.getButton().blink();
-				Thread.sleep(1000/round);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			move.getButton().blink();
 		}
 		
 	}
@@ -150,7 +145,7 @@ public class SimonScreenZheng extends ClickableScreen implements Runnable {
 			ButtonInterface randButton = buttonList.get((int)  Math.random() * buttonList.size());
 			move = new Move(randButton);
 			
-		}while(!moveList.get(moveList.size() - 1).equals(move));
+		}while(moveList.size() != 0 && !moveList.get(moveList.size() - 1).equals(move));
 		
 		return move;
 	}

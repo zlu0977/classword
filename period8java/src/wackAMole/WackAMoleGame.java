@@ -24,5 +24,4 @@ public class WackAMoleGame extends GuiApplication {
 		app.start();
 
 	}
-
 }

@@ -2,6 +2,7 @@ package SimonZheng;
 
 import guiPackage.GuiApplication;
 import guiPackage.Screen;
+import simon.SimonScreenZheng;
 
 public class SimonGameZheng extends GuiApplication implements Runnable {
 	

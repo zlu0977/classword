@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 
 import guiPackage.sampleGames.MouseFollower;
 
-public class MovingComponent extends Component implements Runnable {
+public abstract class MovingComponent extends Component implements Runnable {
 	
 	private double vx;
 	private double vy;
@@ -18,12 +18,12 @@ public class MovingComponent extends Component implements Runnable {
 	public MovingComponent(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		vx = 3;
-		vy = 2;
+		vy = 3;
 		running = false;
 		play();
 	}
 	
-	private void play() {
+	public void play() {
 		if(!running)
 		{
 			Thread move = new Thread(this);
@@ -57,16 +57,7 @@ public class MovingComponent extends Component implements Runnable {
 
 	}
 
-	public void checkBehaviors() {
-		if(MouseFollower.coordScreen != null)
-		{
-			if(getX() > MouseFollower.coordScreen.getWidth() - getWidth()|| getX() < 0)
-				vx = -1 * vx;
-			
-			if(getY() > MouseFollower.coordScreen.getHeight() - getHeight()|| getY() < 0)
-				vy = -1 * vy;
-		}
-	}
+	public abstract void checkBehaviors();
 
 	@Override
 	public void update(Graphics2D g) {
@@ -85,10 +76,7 @@ public class MovingComponent extends Component implements Runnable {
 		drawImage(g);
 	}
 	
-	public void drawImage(Graphics2D g) {
-		g.setColor(Color.black);
-		g.fillOval(0, 0, getWidth(), getHeight());
-	}
+	public abstract void drawImage(Graphics2D g);
 
 	public void setX(int x)
 	{
